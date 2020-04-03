@@ -1,0 +1,198 @@
+Sub Recepcao()
+'Macro Recepcao de dados
+Dim VarCurso As String
+Dim VarData As Date
+Dim VarParticipante As String
+Dim VarDepto As String
+Dim VarEmpresa As String
+Dim VarCusto As Single
+Application.StatusBar = "Informe os dados !!!"
+
+VarCurso = Application.InputBox("Nome do Curso:", , , , , , , 2)
+VarData = Application.InputBox("Data do Curso:", , , , , , , 1)
+VarParticipante = Application.InputBox("Nome do Participante:", , , , , , , 2)
+VarDepto = Application.InputBox("Nome do Departamento:", , , , , , , 2)
+VarEmpresa = Application.InputBox("Nome da Empresa:", , , , , , , 2)
+VarCusto = Application.InputBox("Valor do Custo:", , , , , , , 1)
+Range("Curso").Select
+ActiveCell.FormulaR1C1 = VarCurso
+Range("Data").Select
+ActiveCell.FormulaR1C1 = VarData
+Range("Participante").Select
+ActiveCell.FormulaR1C1 = VarParticipante
+Range("Departamento").Select
+ActiveCell.FormulaR1C1 = VarDepto
+Range("Empresas").Select
+ActiveCell.FormulaR1C1 = VarEmpresa
+Range("Custo").Select
+ActiveCell.FormulaR1C1 = VarCusto
+Application.StatusBar = "Salvando Informa��es. Aguarde!!!"
+Application.StatusBar = False
+
+End Sub
+
+Sub Cadastra2()
+' Macro Cadastra
+    Dim VarCurso As String
+    Dim VarData As Date
+    Dim VarParticipante As String
+    Dim VarDepto As String
+    Dim VarEmpresa As String
+    Dim VarCusto As Single
+    CxCadastra.Show
+End Sub
+------------------------------------------------------------------
+
+
+Sub Transporte()
+' Transporte Macro'
+' Atalho do teclado: Ctrl+Shift+T'
+    Range("I4:N4").Select
+    Selection.Copy
+    Application.Goto Reference:="ultima"
+    Selection.End(xlUp).Select
+    ActiveCell.Offset(1, 0).Range("A1").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Application.Goto Reference:="R1C1"
+End Sub
+
+------------------------------------------------------------------
+
+Sub SalvarCadastro()
+' Macro para salvar os daos'
+Application.StatusBar = "Salvando Informa��es. Aguarde!!!"
+ActiveWorkbook.Save
+Application.StatusBar = False
+
+End Sub
+
+---------------------------------------------------------------------
+
+Sub Cadastra()
+'Macro Cadastro de Dados
+    Recepcao
+    Transporte
+    SalvarCadastro
+End Sub
+
+----------------------------------------------------------------------
+
+Sub SortCurso()
+'
+' SortCurso Macro
+'
+' Atalho do teclado: Ctrl+Shift+U
+'
+Application.StatusBar = "Aguarde a Classifica��o por curso"
+MsgBox "Os dados ser�o classificados por: Curso", 64, "Classifica��o"
+
+    Range("A8").Select
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("A9:A13"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort
+        .SetRange Range("A8:F1000")
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+    Range("A1").Select
+    
+Application.StatusBar = False
+
+End Sub
+
+Sub SortData()
+'
+' SortData Macro
+'
+' Atalho do teclado: Ctrl+Shift+D
+Application.StatusBar = "Aguarde a Classifica��o por Data"
+MsgBox "Os dados ser�o classificados por: Data", 64, "Classifica��o"
+
+    Range("A8").Select
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("B9:B13"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort
+        .SetRange Range("A8:F1000")
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+    Range("A1").Select
+    
+Application.StatusBar = False
+
+End Sub
+
+Sub SortParticipante()
+'
+' SortParticipante Macro
+'
+' Atalho do teclado: Ctrl+Shift+P
+Application.StatusBar = "Aguarde a Classifica��o por Participante"
+MsgBox "Os dados ser�o classificados por: Participante", 64, "Classifica��o"
+
+    Range("A8").Select
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("C9:C13"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    With ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort
+        .SetRange Range("A8:F1300")
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+    Range("A1").Select
+Application.StatusBar = False
+
+End Sub
+
+Sub SortRelatorio()
+'
+' SortRelatorio Macro
+'
+' Atalho do teclado: Ctrl+Shift+R
+Application.StatusBar = "Aguarde a Classifica��o pela relat�rio"
+MsgBox "Os dados ser�o classificados por: rELAR�RIO", 64, "Classifica��o"
+    Range("A8").Select
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("E9:E13"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("D9:D13"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortNormal
+    ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort.SortFields.Add Key:= _
+        Range("C9:C13"), SortOn:=xlSortOnValues, Order:=xlDescending, DataOption _
+        :=xlSortNormal
+    With ActiveWorkbook.Worksheets("CADASTRO_TREINAMENTO").Sort
+        .SetRange Range("A8:F1000")
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+    Range("A1").Select
+    
+Application.StatusBar = False
+
+End Sub
+
+----------------------------------------------------------------------
+
+Sub Classifica��o()
+    CaixaSort.Show
+End Sub
